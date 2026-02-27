@@ -40,7 +40,7 @@ const syncUserCreation = inngest.createFunction(
   },
 );
 
-//delete a user
+//delete a user from clerk and update the status of the listings to inactive if the user has any active listings or chats or transactions, otherwise delete the user from database
 const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-from-clerk" },
   { event: "clerk/user.deleted" },
