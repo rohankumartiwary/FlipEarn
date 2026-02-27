@@ -6,7 +6,7 @@ export const inngest = new Inngest({ id: "profile-marketplace" });
 
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
-  { event: "webhook-integration/session.created" },
+  { event: "webhook-integration/user.created" },
   async ({ event }) => {
     const { data } = event;
     //check if user already exists in db
