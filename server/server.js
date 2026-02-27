@@ -7,7 +7,7 @@ import { inngest, functions } from "./inngest/index.js"
 
 const app=express();
 app.use("/api/inngest", (req, res, next) => {
-  console.log("SIGNING KEY:", process.env.INNGEST_SIGNING_KEY);
+  //console.log("SIGNING KEY:", process.env.INNGEST_SIGNING_KEY);
   next();
 }, serve({ client: inngest, functions }));
 app.use(clerkMiddleware());
