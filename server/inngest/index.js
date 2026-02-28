@@ -6,8 +6,9 @@ export const inngest = new Inngest({ id: "profile-marketplace" });
 
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
-  { event: "webhook-integration/user.created" },
+  { event: "clerk/user.created" },
   async ({ event }) => {
+    console.log("User event received:", event);
     const { data } = event;
     //check if user already exists in db
 
@@ -43,9 +44,12 @@ const syncUserCreation = inngest.createFunction(
 //delete a user from clerk and update the status of the listings to inactive if the user has any active listings or chats or transactions, otherwise delete the user from database
 const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-from-clerk" },
-  { event: "webhook-integration/user.deleted" },
+  { event: "clerk/user.deleted" },
   async ({ event }) => {
+    console.log("User event received:", event);
     const { data } = event;
+    console.log("User event received:", event);
+    console.log("User deleted", data);
 
     const listings = await prisma.listing.findMany({
       where: { ownerId: data.id },
@@ -77,7 +81,7 @@ const syncUserDeletion = inngest.createFunction(
 //ingest function to update the data in database
 const syncUpdateCreation = inngest.createFunction(
   { id: "update-user-from-clerk" },
-  { event: "webhook-integration/user.updated" },
+  { event: "clerk/user.updated" },
 
   async ({ event }) => {
     const { data } = event;
