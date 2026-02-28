@@ -6,7 +6,7 @@ export const inngest = new Inngest({ id: "profile-marketplace" });
 
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
-  { event: "clerk/user.created" },
+  { event: "webhook-integration/user.created" },
   async ({ event }) => {
         const {data}=event;
         //check if user already exists in db
@@ -43,7 +43,7 @@ const syncUserCreation = inngest.createFunction(
 //delete a user
 const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-from-clerk" },
-  { event: "clerk/user.created" },
+  { event: "webhook-integration/user.deleted" },
   async ({ event }) => {
         const {data}=event;
 
@@ -73,8 +73,8 @@ const syncUserDeletion = inngest.createFunction(
 
 //ingest function to update the data in database
 const syncUpdateCreation = inngest.createFunction(
-  { id: "update-user-from-clerk" },
-  { event: "clerk/user.created" },
+  { id: "update-user-from-webhook" },
+  { event: "webhook-integration/user.updated" },
 
   async ({ event }) => {
         const {data}=event;
