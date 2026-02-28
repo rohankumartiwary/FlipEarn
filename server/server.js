@@ -10,6 +10,7 @@ app.use(clerkMiddleware());
 app.use(express.json());
 app.use(cors());
 
+<<<<<<< HEAD
 app.get("/", (req, res) => {
   res.send("Hey");
 });
@@ -19,3 +20,18 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
 });
+=======
+app.use("/api/inngest", serve({ client: inngest, functions }));
+
+
+app.get("/",(req,res)=>{
+    res.send("Server is running");
+})
+
+
+
+const PORT=process.env.PORT || 3000
+app.listen(PORT,()=>{
+    console.log("Server running");
+})
+>>>>>>> a9c622eb6608da6066f59cb0ab3dd5a8cbbb1d12
